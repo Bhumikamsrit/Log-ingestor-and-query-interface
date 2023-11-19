@@ -1,0 +1,100 @@
+#Log Ingestor (Node.js with Express):
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3000;
+
+app.use(bodyParser.json());
+
+// Endpoint for log ingestion
+app.post('/ingest', (req, res) => {
+  const logData = req.body;
+  // Process and store logData as needed
+  console.log('Received log:', logData);
+  // Add your storage logic here
+
+  res.status(200).send('Log ingested successfully');
+});
+
+app.listen(PORT, () => {
+  console.log(`Log Ingestor listening on port ${PORT}`);
+});
+
+
+Query Interface (React for front-end, Node.js with Express for back-end):
+Install necessary packages:
+npm install express body-parser cors axios react react-dom react-scripts
+Create a simple React app (client directory):
+
+// client/src/App.js
+import React, { useState } from 'react';
+import axios from 'axios';
+
+function App() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
+  const handleQuery = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/query?search=${query}`);
+      setResults(response.data);
+    } catch (error) {
+      console.error('Error querying logs:', error);
+    }
+  };
+
+  return (
+    <div>
+      <h1>Log Query Interface</h1>
+      <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+      <button onClick={handleQuery}>Search</button>
+
+      <div>
+        <h2>Results</h2>
+        <ul>
+          {results.map((result, index) => (
+            <li key={index}>{JSON.stringify(result)}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+Create the back-end server:
+javascript
+Copy code
+// server.js
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = 4000;
+
+app.use(cors());
+
+// Sample in-memory log storage (replace with your actual storage)
+const logs = [];
+
+// Endpoint for log query
+app.get('/query', (req, res) => {
+  const searchQuery = req.query.search;
+
+  // Sample logic: search in logs based on the query
+  const results = logs.filter((log) => JSON.stringify(log).includes(searchQuery));
+
+  res.json(results);
+});
+
+app.listen(PORT, () => {
+  console.log(`Query Interface listening on port ${PORT}`);
+});
+Run both servers:
+
+# Start Log Ingestor
+node log-ingestor.js
+
+# Start Query Interface
+node server.js
