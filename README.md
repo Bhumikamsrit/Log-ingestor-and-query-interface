@@ -28,7 +28,7 @@ This project is a Log Management System consisting of a Log Ingestor and a Query
 1. Clone the repository:
 
 
-   git clone https://github.com/your-username/log-management-system.git
+   git clone https://github.com/Bhumikamsrit/log-management-system.git
 
 
 
