@@ -64,8 +64,7 @@ function App() {
 
 export default App;
 Create the back-end server:
-javascript
-Copy code
+
 // server.js
 const express = require('express');
 const cors = require('cors');
