@@ -10,11 +10,10 @@ app.use(bodyParser.json());
 // Endpoint for log ingestion
 app.post('/ingest', (req, res) => {
   const logData = req.body;
-  // Process and store logData as needed
+// Process and store logData as needed
   console.log('Received log:', logData);
-  // Add your storage logic here
-
-  res.status(200).send('Log ingested successfully');
+// Add your storage logic here
+res.status(200).send('Log ingested successfully');
 });
 
 app.listen(PORT, () => {
