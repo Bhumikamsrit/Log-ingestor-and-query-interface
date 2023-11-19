@@ -44,7 +44,7 @@ node log-ingestor.js
 node server.js
 cd client
 npm start
-Visit http://localhost:3000 in your browser to access the Query Interface.
+
 
 System Design
 The system consists of two main components:
